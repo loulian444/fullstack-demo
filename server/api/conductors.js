@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const { requireUser } = require("./utils")
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //Creates a new conductor
-router.post("/", async (req, res) => {
+router.post("/", requireUser, async (req, res) => {
   try {
     const conductor = await prisma.conductor.create({
       data: req.body,
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
 });
 
 //Updates conductor with specified id
-router.put("/:id", async (req, res) => {
+router.put("/:id", requireUser, async (req, res) => {
   try {
     const conductor = await prisma.conductor.update({
       where: {
@@ -68,7 +68,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //Deletes a conductor
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireUser, async (req, res) => {
   try {
     const conductor = await prisma.conductor.delete({
       where: {
