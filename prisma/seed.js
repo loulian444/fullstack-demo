@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcrypt");
 
 const prisma = new PrismaClient();
 
@@ -90,6 +91,34 @@ const main = async () => {
       city: "New York City",
       state: "New York",
       capacity: 1500,
+    },
+  });
+
+  //Create User
+  await prisma.user.create({
+    data: {
+      firstName: "Jean-Luc",
+      lastName: "Picard",
+      username: "captainP",
+      password: await bcrypt.hash("3urlGreyH0t", 10),
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      firstName: "Bicboi",
+      lastName: "Hughes",
+      username: "xXxGIGANTOUSxXx",
+      password: await bcrypt.hash("1ms0b1g", 10),
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      firstName: "Average",
+      lastName: "size",
+      username: "justAvg",
+      password: await bcrypt.hash("b3l0wAVG", 10),
     },
   });
 };
