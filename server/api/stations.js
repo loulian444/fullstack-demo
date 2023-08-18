@@ -37,12 +37,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newStation = await prisma.station.create({
-      data: {
-        name: req.body.name,
-        city: req.body.city,
-        state: req.body.state,
-        capacity: req.body.capacity,
-      },
+      data: req.body,
     });
 
     if (!newStation) {
@@ -64,12 +59,7 @@ router.put("/:id", async (req, res) => {
       where: {
         id: Number(req.params.id),
       },
-      data: {
-        name: req.body.name,
-        city: req.body.city,
-        state: req.body.state,
-        capacity: req.body.capacity,
-      },
+      data: req.body,
     });
 
     if (!updateStation) {
