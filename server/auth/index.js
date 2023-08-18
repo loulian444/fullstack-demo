@@ -54,19 +54,15 @@ router.post(`/login`, async (req, res) => {
 });
 
 router.get(`/me`, async (req, res) => {
-  const auth = req.headers.authorization;
-
-  const token = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
-
-  const { id } = jwt.verify(token, process.env.JWT);
+  // Checks the request for userId which was set by middleware in server/index.js
   const user = await prisma.user.findUnique({
-    where: { id }
-  })
+    where: { id: req.userId },
+  });
 
   if (user) {
-    res.send(user)
+    res.send(user);
   } else {
-    res.send(`user not found`)
+    res.send(`user not found`);
   }
 });
 
