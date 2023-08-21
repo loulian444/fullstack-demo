@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "server": "node ./server/index.js",
+    "client:build": "cd client && npm run build ",
     "server:dev": "nodemon ./server/index.js",
     "seed": "npx prisma migrate reset "
   },
@@ -21,7 +22,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "prisma": "^5.1.1"
